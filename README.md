@@ -1,4 +1,4 @@
-# 🤖 Discord Cleverbot 🤖
+# ☆ Discord Cleverbot
 Built with Discord.py and Selenium to run Cleverbot on Discord
 
 Requirements are:
