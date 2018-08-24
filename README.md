@@ -12,7 +12,7 @@ Requirements are:
 1.0.0 EXE - https://github.com/mycxle/Discord-Cleverbot/releases (put chromedriver.exe in same folder)
 
 ### Instructions
-Create a .txt file in the same folder as the main program that contains the Discord account's login credentials and the channel ID the bot should be active in.
+Create a .txt file in the same folder as the main program that contains your Discord login credentials and the channel ID the bot should be active in.
 ```markdown
 email@address.com
 password
