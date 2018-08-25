@@ -5,9 +5,25 @@ import cgi
 import sys
 from clever import Cleverbot
 from helpers import *
+import os
+from selenium import webdriver
 
 client = discord.Client()
-cb = Cleverbot()
+
+options = None
+if 'DYNO' in os.environ:
+    chrome_driver = CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
+
+    chrome_bin = os.environ.get('GOOGLE_CHROME_BIN', "chromedriver")
+    options = webdriver.ChromeOptions()
+    options.binary_location = chrome_bin
+    options.add_argument('headless')
+    options.add_argument("--no-sandbox")
+    options.add_argument('window-size=1366x768')
+
+cb = Cleverbot(options=options)
+
+total_sent = 0
 
 args = sys.argv
 if len(args) <= 1:
@@ -65,6 +81,11 @@ async def on_message(message):
         print(client.user.name + ": " + resp)
 
         await client.send_message(message.channel, resp)
+        global total_sent
+        total_sent += 1
+        if total_sent >= 500:
+            print("sent 500 messages, sleeping..")
+            sys.exit(0)
 
 print('\nStarting...')
 if not user_token is None:

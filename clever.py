@@ -4,13 +4,15 @@ from selenium.webdriver.chrome.options import Options
 import asyncio
 
 class Cleverbot:
-    def __init__(self, chromedriver=r"chromedriver.exe", headless=True):
-        options = Options()
-        if headless: options.add_argument('headless')
-        options.add_argument('window-size=1280x720')
-        options.add_argument('--disable-browser-side-navigation')
-        prefs = {"profile.default_content_setting_values.notifications": 2}
-        options.add_experimental_option("prefs",prefs)
+    def __init__(self, chromedriver=r"chromedriver.exe", headless=True, options=None):
+
+        if options is None:
+            options = Options()
+            if headless: options.add_argument('headless')
+            options.add_argument('window-size=1280x720')
+            options.add_argument('--disable-browser-side-navigation')
+            prefs = {"profile.default_content_setting_values.notifications": 2}
+            options.add_experimental_option("prefs",prefs)
 
         self.driver = webdriver.Chrome(chrome_options=options, executable_path=chromedriver)
         self.driver.get("https://www.cleverbot.com/")
